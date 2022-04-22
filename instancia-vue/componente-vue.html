@@ -1,0 +1,26 @@
+<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+<script src="http://localhost:8080"></script>
+
+<div id="app">
+    <!--TUDO É VOLTADO COMO STRING, ENTÃO É PRECISO TRATAR OS DADOS-->
+    {{ modulo }}
+    <button @click="alterar">Alterar Aula</button>
+    <button @click="alterar">Alterar Módulo</button>
+</div>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            aula: 'Aula: Mondanto Instância Vue',
+            modulo: 'Módulo: Instância Vue'
+        },
+        methods:{
+            alterarAula(){
+                this.titulo1 += '#'
+            },
+            alterarModulo(){
+                this.titulo1 += '#'
+            }
+        }
+    })
+</script>

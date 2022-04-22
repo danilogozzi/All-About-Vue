@@ -1,0 +1,21 @@
+<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+<script src="http://localhost:8080"></script>
+
+<div id="app">
+  <!--TUDO É VOLTADO COMO STRING, ENTÃO É PRECISO TRATAR OS DADOS-->
+    {{ message }}
+  </div>
+<script>
+      var app = new Vue({
+    el: '#app',
+    data: {
+      message: 'Hello Vue!'
+    }
+  })
+</script>
+<!--
+    POR CONTA DO PROXY O VUE TRABALHA DE FORMA REATIVA
+     USANDO OS GET E SET PARA ALTERAR NOSSA VISÃO.
+     $el representa toda a estrutuda HTML que foi definida que é a versão que está sendo usada na DOM.
+     $data todos os dados passados na construção da instância.
+-->
