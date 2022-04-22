@@ -1,0 +1,50 @@
+<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+<style>
+
+</style>
+<div id="app">
+    <div>
+        <h5>Ex 01</h5>
+        Array:
+        {{numbers}}
+        <hr>
+        v1: {{numbers.v1}} ,
+        v2: {{numbers.v2}}
+        <hr>
+        <input v-model="numbers.v1" min="0" type="number">
+        <input v-model="numbers.v2" min="0" type="number">
+        <hr>
+        <!--COMPUTED large()-->
+        Maior Número: {{large}}
+    </div>
+    <hr>
+    <div>
+        <h5>Ex 02</h5>
+        {{numbers.v3}} , {{numbers.v4}} , {{numbers.v5}}
+        <hr>
+        <input v-model="numbers.v3" min="0" type="number">
+        <input v-model="numbers.v4" min="0" type="number">
+        <input v-model="numbers.v5" min="0" type="number">
+
+    </div>
+</div>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            numbers: {
+                v1: 0,
+                v2: 0,
+                v3: 0,
+                v4: 0,
+                v5: 0
+            }
+        },
+        computed: {
+            large() {
+                return this.numbers.v1 > this.numbers.v2 ? this.numbers.v1 : this.numbers.v2
+            }
+        },
+      
+    })
+</script>
