@@ -1,0 +1,75 @@
+<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+<style>
+
+</style>
+<div id="app">
+    <!-- V-ELSE PRECISA ESTAR EM SEQUÊNCIA DE V-IF PARA FUNCIONAR CORRETAMENTE-->
+    <p v-if="logado">Usuário Logado: {{nome}}</p>
+    <p v-else>Nenhum usuário logado</p>
+    <button @click="logado = !logado">
+        {{logado ? 'Sair' : 'Entrar'}}
+    </button>
+    <hr>
+    <div v-if="logando">
+        Logou!!!
+        <button @click="logando = !logando">DESLOGAR</button>
+    </div>
+    <div v-else>
+        <input type="email" v-model="login" name="login">
+        <input type="password" v-model="senha" name="senha" id="">
+        <button @click="teste()">Logar</button>
+    </div>
+    <hr>
+    <div v-if="!userLogado">
+        <input type="text" v-model="userLogin">
+        <input type="text" v-model="userPassword">
+        <button @click="userTeste()">Logar</button>
+        <br>
+        {{msg}}
+    </div>
+    <div v-else>
+        Bem vindo!
+        <button @click="userLogado = !userLogado">Deslogar</button>
+    </div>
+</div>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            nome: 'Maria',
+            logado: false,
+            logando: false,
+            login: "",
+            senha: "",
+            userLogado:false,
+            userLogin:'',
+            userPassword:'',
+            userLogin2: 'danttz',
+            userPassword2: 'data1409',
+            msg:'',
+            usuarios: {
+                id: 1,
+                login1: "",
+                senha1: ""
+            }
+        },
+        methods: {
+            userTeste: function(){
+                if(this.userLogin == this.userLogin2 && this.userPassword == this.userPassword2){
+                    this.userLogado = true
+                }else{
+                    this.userLogado = false
+                }
+            },
+            teste: function () {
+                console.log(`login:${this.login} e senha:${this.senha}`)
+                this.login1 = this.login
+                this.senha1 = this.senha
+                this.login = ""
+                this.senha = ""
+                this.logando = true
+                console.log(this.usuarios)
+            }
+        }
+    })
+</script>

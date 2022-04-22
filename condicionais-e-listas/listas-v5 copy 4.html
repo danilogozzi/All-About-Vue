@@ -1,0 +1,64 @@
+<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+<style>
+
+</style>
+<div id="app">
+    <ul>
+        <!--BUSCAR POR INDICE-->
+        <li v-for="(cor, i) in cores" :key="cor">{{i + 1}} {{cor}}</li>
+    </ul>
+    <button @click="cores.push('branca')">Adicionar</button>
+    <hr>
+    <!--ESCONDENDO NA DOM-->
+    <template v-for="(cor , i) in cores ">
+        <h1>{{cor}}</h1>
+        <p>{{i}}</p>
+    </template>
+    <hr>
+    <ul>
+        <li v-for="pessoa in pessoas">
+            <div v-for="(valor, chave, index) in pessoa">
+                {{chave}} = {{valor}} ({{index +1}})
+            </div>
+        </li>
+    </ul>
+    <hr>
+    <!--QUANDO NÃO DEPENDE DE UM ARRAY OU UMA LISTA NOS DADOS DA INSTANCIA DO VUE-->
+    <div v-for="n in 10">{{n}}</div>
+    <hr>
+    <div v-for="carro in carros">
+       {{carro.marca}}
+    </div>
+    <hr>
+    
+</div>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            cores:['vermelho','verde','amarelo','azul'],
+            pessoas:[
+                {nome: 'Ana', idade: 26, peso:59},
+                {nome: 'Guilherme', idade: 22, peso: 89}
+            ],
+            carros:[
+                {marca:"volkswag",ano:2002},
+                {marca:"Fox",ano:2005},
+                {marca:"Honda",ano:1999},
+                {marca:"Hyundai", ano:2020}
+            ],
+            users:[
+                {id:1, name:'Danilo', password:'data1409'},
+                {id:2, name:'Danielly', password:'danihyuga'}
+        ]
+        }
+    })
+</script>
+<style>
+    ul{
+        list-style: none;
+    }
+    h1, p {
+        display: inline;
+    }
+</style>

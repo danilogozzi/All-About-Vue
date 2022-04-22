@@ -1,0 +1,37 @@
+<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+<style>
+
+</style>
+<div id="app">
+    <ul>
+        <!--BUSCAR POR INDICE-->
+        <li v-for="(cor, i) in cores">{{i + 1}} {{cor}}</li>
+    </ul>
+    <hr>
+    <ul>
+        <!--BUSCAR POR INDICE-->
+        <li v-for="(pessoa, i) in pessoas">{{i + 1}} {{pessoa.nome}}</li>
+        <hr>
+        <li v-for="(pessoa, i) in pessoas">{{i + 1}} {{pessoa.idade}}</li>
+        <hr>
+        <li v-for="(pessoa, i) in pessoas">{{i + 1}} {{pessoa.peso}}</li>
+    </ul>
+
+</div>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            cores:['vermelho','verde','amarelo','azul'],
+            pessoas:[
+                {nome: 'Ana', idade: 26, peso:59},
+                {nome: 'Guilherme', idade: 22, peso: 89}
+            ]
+        }
+    })
+</script>
+<style>
+    ul{
+        list-style: none;
+    }
+</style>
