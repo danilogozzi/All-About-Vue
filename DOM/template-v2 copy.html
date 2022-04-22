@@ -1,0 +1,172 @@
+<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+
+<div id="app">
+  {{ message }}
+  <br>
+  {{ saudacao() }}
+  <hr>
+  <div id="calculadora">
+    <div id="tela">
+      {{resultado}}
+    </div>
+    <div id="botoes">
+      <div>
+        <button @click="resultado += '7'">7</button>
+        <button @click="resultado += '8'">8</button>
+        <button @click="resultado += '9'">9</button>
+        <button @click="subtrair()">-</button>
+      </div>
+      <div>
+        <button @click="resultado += 4">4</button>
+        <button @click="resultado += 5">5</button>
+        <button @click="resultado += 6">6</button>
+        <button @click="somar()">+</button>
+      </div>
+      <div>
+        <button @click="resultado += 1">1</button>
+        <button @click="resultado += 2">2</button>
+        <button @click="resultado += 3">3</button>
+        <button @click="dividir()">/</button>
+      </div>
+      <div>
+        <button @click="resultado += 0">0</button>
+        <button @click="resultado = ' '">C</button>
+        <button @click="resposta()">=</button>
+        <button @click="multiplicar()">*</button>
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+  #calculadora {
+    background-color: darkgray;
+    width: 30rem;
+    height: 45rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  #tela {
+    margin: 1rem;
+    height: 2rem;
+    background-color: white;
+    width: 80%;
+  }
+
+  #botoes button {
+    width: 7rem;
+    height: 10rem;
+    cursor: pointer;
+  }
+</style>
+<script>
+  var app = new Vue({
+    el: '#app',
+    data: {
+      message: 'Hello Vue!',
+      resultado: "",
+      soma: false,
+      subtrai: false,
+      divide: false,
+      multiplica: false,
+      v1: "",
+      v2: ""
+    },
+    methods: {
+      saudacao: function () {
+        return 'Boa semana!'
+      },
+      somar: function () {
+        this.soma = true
+        this.v1 = this.resultado
+        console.log(this.v1)
+        this.resultado = ""
+      },
+      subtrair: function () {
+        this.subtrai = true
+        this.v1 = this.resultado
+        console.log(this.v1)
+        this.resultado = ""
+      },
+      dividir: function () {
+        this.divide = true
+        this.v1 = this.resultado
+        console.log(this.v1)
+        this.resultado = ""
+      },
+      multiplicar: function () {
+        this.multiplica = true
+        this.v1 = this.resultado
+        console.log(this.v1)
+        this.resultado = ""
+      },
+      resposta: function () {
+        if (this.soma == true) {
+          console.log(
+            "Escolheu somar"
+          )
+          this.v2 = this.resultado
+          console.log(this.v2)
+
+          console.log(
+            parseInt(this.v1)+parseInt(this.v2)
+          )
+          
+          this.resultado = parseInt(this.v1)+parseInt(this.v2)
+
+          this.soma = false
+        }
+        if (this.subtrai == true) {
+          console.log(
+            "Escolheu subtrair"
+          )
+          this.v2 = this.resultado
+          console.log(this.v2)
+
+          console.log(
+            parseInt(this.v1)-parseInt(this.v2)
+          )
+          
+          this.resultado = parseInt(this.v1)-parseInt(this.v2)
+
+          this.subtrai = false
+        }
+        if (this.divide == true) {
+          console.log(
+            "Escolheu dividir"
+          )
+          
+          this.v2 = this.resultado
+          console.log(this.v2)
+
+          console.log(
+            parseInt(this.v1)/parseInt(this.v2)
+          )
+          
+          this.resultado = parseInt(this.v1)/parseInt(this.v2)
+
+          this.divide = false
+        }
+        if (this.multiplica == true) {
+          console.log(
+            "Escolheu multiplicar"
+          )
+
+          this.v2 = this.resultado
+          console.log(this.v2)
+
+          console.log(
+            parseInt(this.v1)*parseInt(this.v2)
+          )
+          
+          this.resultado = parseInt(this.v1)*parseInt(this.v2)
+
+          this.multiplica = false
+        }
+      }
+    }
+  })
+</script>

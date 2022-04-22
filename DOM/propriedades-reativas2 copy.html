@@ -1,0 +1,63 @@
+<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+<script src="http://localhost:8080"></script>
+<!-- Two Way Binding-->
+<div id="app">
+  <button v-on:click="aumentar">Aumentar</button>
+  <button v-on:click="contador2++">Aumentar 2</button>
+  <button v-on:click="diminuir">Diminuir</button>
+  <p>Contador: {{contador}} | {{contador2}}</p>
+  <p>Resultado: {{resultado}}</p>
+  <hr>
+  <input id="nome" type="text" v-model="v1">
+  {{valorImpar}}
+  <hr>
+  <div>
+    Produtos total:{{valor}}
+    <button @click="addCart()">add</button>
+    <br>
+    {{desconto}}
+  </div>
+  <hr>
+</div>
+<script>
+  var app = new Vue({
+    el: '#app',
+    data: {
+      contador: 0,
+      contador2: 0,
+      v1:0,
+      valor:0,
+      item:0
+    },
+    /*FUNCAO COMPUTADA AJUDA A CHAMA-LÁ APENAS QUANDO FOR NECESSÁRIO*/
+    computed: {
+      desconto(){
+        return this.valor >= 15? `Ganhou desconto de 50% ->${this.valor/2}`:``
+      },
+      valorImpar(){
+        return this.v1 % 2 ==0? "Par":"Impar"
+      },
+      resultado() {
+        console.log('Metodo computed resultado chamado...')
+        return this.contador >= 5 ?
+          'Maior ou igual a 5' : 'Menor que 5'
+      },
+      tamanhoNome(){
+        console.log("Metodo computed resultado chamado....")
+        var nome = document.getElementById("nome")
+        return this.nome.length >=10? "Nome muito grande!":""
+      }
+    },
+    methods: {
+      addCart(){
+        this.valor += 2.50
+      },
+      aumentar() {
+        this.contador++
+      },
+      diminuir() {
+        this.contador--
+      }
+    }
+  })
+</script>

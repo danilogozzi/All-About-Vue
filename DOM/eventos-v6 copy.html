@@ -1,0 +1,26 @@
+<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+
+<div id="app">
+  <!--TUDO É VOLTADO COMO STRING, ENTÃO É PRECISO TRATAR OS DADOS-->
+  <p>
+    {{ contador }}
+    {{ contador >= 10? 'Passou de 10': 'Ainda não passou de 10' }}
+  </p> 
+  <!--ESCUTANDO EVENTOS COM VUE--> 
+    <button v-on:click="somar">Somar +1</button>
+  </div>
+<script>
+      var app = new Vue({
+    el: '#app',
+    data: {
+      contador:0,
+      x: 0,
+      y: 0
+    },
+    methods:{
+      somar(){
+        this.contador++
+      }
+    }
+  })
+</script>

@@ -1,0 +1,28 @@
+<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+<script src="http://localhost:8080"></script>
+<div id="app">
+  <!--QUANDO QUISER QUE UM ELEMENTO NÃO PRECISE SER ATUALIZAÇÃO SEMPRE QUE HOUVER UMA MUDANÇA NOS DADOS DA INSTANCIA DO VUE-->
+  <p v-once>{{message2}}</p>
+  {{ message }}
+    <br>
+    {{ saudacao() }}
+    <br>
+    <!-- V-BIND:HREF <- FAZ COM QUE O VUE INTERPRETE SEM O DOUBLE MUSTARDA-->
+    <a v-bind:href="link">Google</a>
+  </div>
+<script>
+      var app = new Vue({
+    el: '#app',
+    data: {
+      message: 'Hello Vue!',
+      message2:'Hellow Vue4!',
+      link: 'http://google.com.br'
+    },
+    methods:{
+      saudacao: function(){
+        this.message = 'Bom dia!!!'
+        return this.message
+      }
+    }
+  })
+</script>

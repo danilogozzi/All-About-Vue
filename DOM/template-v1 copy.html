@@ -1,0 +1,186 @@
+<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+<script src="http://localhost:8080"></script>
+
+<div id="app">
+  <!--TUDO É VOLTADO COMO STRING, ENTÃO É PRECISO TRATAR OS DADOS-->
+  {{ message }}
+  <br>
+  <ul>
+    <li v-for="item in listaItems" :key="item.listaItems">
+      {{item}}
+    </li>
+    <button @click="addItem()">add</button>
+    <input type="text" v-model="listaItems.nome">
+    <button @click="listaItems.valor -= 1">-1</button>
+  </ul>
+  <hr>
+  <div v-if="testeImc" class="imc">
+    <button @click="homem()">Homem</button>
+    <button @click="mulher()">Mulher</button>
+    <form action="">
+      <label for="">
+        Idade
+        <input type="number" v-model="idade">anos
+      </label>
+      <br>
+      <label for="">        
+        Altura
+        <input type="number" v-model="altura">cm
+      </label>
+      <br>
+      <label for="">
+        Peso
+        <input type="number" v-model="peso">kg
+      </label>
+    </form>
+    <button @click="calcImc(), testeImc = false">Calcular</button>
+  </div>
+  <div class="imc2" v-else>
+    IMC: {{peso}} / ({{altura}} x {{altura}}) = {{imc}} com {{idade}} de idade.
+    <button @click="testeImc = true">Voltar</button>
+  </div>
+  <hr>
+  <form-control>
+    <label>
+      Nome:
+      <input v-model="prodName" type="text">
+    </label>
+    <label>
+      Descrição:
+      <input v-model="prodDesc" type="text">
+    </label>
+    <label>
+      Preço:
+      <input v-model="prodValue" type="number">
+    </label>
+    <button @click="addProd">Registrar Produto</button>
+  </form-control>
+  <hr>
+  <ul class="item-prod">
+    <li class="prod" v-for="produto in produtos" :key="produto">
+      <img class="prod-img" :src="produto.prodImg">
+      <br>
+      <span>{{produto.name}}</span>
+      <p>{{produto.description}}</p>
+      <span>R$ {{produto.value}}</span>
+    </li>
+  </ul>
+</div>
+<script>
+  var app = new Vue({
+    el: '#app',
+    data: {
+      message: 'Hello Vue!',
+      name: 'Danilo',
+      listaItems: {
+        id: 1,
+        nome: "Dichavador",
+        valor: 50
+      },
+      idade:0,
+      altura:0,
+      peso:0,
+      imc:0,
+      homemOp: false,
+      mulherOp:false,
+      testeImc:true,
+      prodName:"",
+      prodDesc:"",
+      prodValue:"",
+      produtos:[
+        {name:"Cadeira", value:50, description:"Ferro Inox", stock:true, prodImg:"https://cdn.lojasempreinox.com.br/media/catalog/product/cache/1/image/1000x1231/17f82f742ffe127f42dca9de82fb58b1/c/a/cadeiras_cozinha_inox.jpg"},
+        {name:"Mesa", value:100, description:"Mesa Vidro Temperado", stock:true, prodImg:"https://a-static.mlcdn.com.br/618x463/tampo-de-vidro-temperado-incolor-para-mesa-120x120cm-8mm-tempermax/woodglass/1887p/b88ea5bf5cfe14ca9da03102f8553f46.jpg"},
+        {name:"Armário de cozinha", value:750, description:"Madeira Cedro", stock:true, prodImg:"https://cdn.leroymerlin.com.br/products/armario_de_cozinha_compacta_barbara_6_portas_1_gaveta_poquema_1566970454_15d4_600x600.jpg"}
+      ]
+    },
+    methods: {
+      addProd: function(){
+        this.produtos.push({
+          name:this.prodName,
+          description:this.prodDesc,
+          value:this.prodValue
+        })
+        console.log(this.produtos)
+        console.log(
+          `${this.prodName} -> R$${this.prodValue} (${this.prodDesc})`
+        )
+        this.prodName = ""
+        this.prodDesc = ""
+        this.prodValue = ""
+      },
+      addItem: function () {
+        this.listaItems.id += 1
+      },
+      homem: function(){
+        console.log("Homem", this.homemOp)
+        this.homemOp = true
+        this.mulherOp = false
+        console.log("Homem", this.homemOp)
+        console.log("Mulher", this.mulherOp)
+      },
+      mulher: function(){
+        console.log("Mulher", this.mulherOp)
+        this.mulherOp = true
+        this.homemOp = false
+        console.log("Mulher", this.mulherOp)
+        console.log("Homem", this.homemOp)
+      },
+      calcImc: function(){
+        this.homemOp = true? this.imc = this.peso / (this.altura * this.altura):''
+        this.mulherOp = true? this.imc = this.peso / (this.altura * this.altura):''
+        console.log(`${this.imc} = ${this.peso} / (${this.altura} * ${this.altura}) com ${this.idade} de idade.`)
+      }
+    }
+  })
+</script>
+<style>
+  .imc{
+    background-color: dimgray;
+    width:15%;
+    padding: 2%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .imc input{
+    margin:1% 0;
+  }
+  .imc button{
+    cursor: pointer;
+  }
+  .imc2{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width:15%;
+    padding: 2%;
+    background-color: slategray;
+  }
+
+  .prod-img{
+    width:15rem;
+  }
+  .item-prod{
+    list-style: none;
+    border:1px solid black;
+    display: flex;
+    padding: 2rem;
+    overflow-x: scroll;
+  }
+  .prod{
+    border:1px solid black;
+    width:25rem;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    height: 25rem;
+    margin: 1rem;
+  }
+  .prod img{
+    width:20rem;
+    height: 15rem;
+    margin: 2rem;
+  }
+</style>

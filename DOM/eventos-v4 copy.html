@@ -1,0 +1,35 @@
+<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+
+<div id="app">
+  <!--TUDO É VOLTADO COMO STRING, ENTÃO É PRECISO TRATAR OS DADOS-->
+  <p>
+    {{ contador }}
+  </p> 
+  <!--ESCUTANDO EVENTOS COM VUE--> 
+    <button v-on:click="somar(5,$event)">Somar +1</button>
+    <p v-on:mousemove="atualizarXY">Mouse: {{x}} e {{y}}</p>
+    <!--PARAR DE PROPAGAR EVENTO DO PAI DO FILHO(STOP)-->
+    <span v-on:mousemove.stop="">PARA AQUI!!!</span>
+    <!--PREVINIR O COMPORTAMENTO PADRÃO DE UM TIPO DE COMPONENTE(PODE SER USADO O PREVENT JUNTO COM STOP)-->
+    <a v-on:click.prevent="" href="http://google.com.br">Google</a>
+  </div>
+<script>
+      var app = new Vue({
+    el: '#app',
+    data: {
+      contador:0,
+      x: 0,
+      y: 0
+    },
+    methods:{
+      somar(passo,event){
+        console.log(passo,event)
+        this.contador+=passo
+      },
+      atualizarXY(e){
+        this.x = e.clientX
+        this.y = e.clientY
+      }
+    }
+  })
+</script>

@@ -1,0 +1,29 @@
+<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+
+<div id="app">
+  <!--TUDO É VOLTADO COMO STRING, ENTÃO É PRECISO TRATAR OS DADOS-->
+  <p>
+    {{ contador }}
+  </p> 
+  <!--ESCUTANDO EVENTOS COM VUE--> 
+  <!--SINTAXE REDUZIDA COM @ E : sem : chamada literal-->
+    <button @click="somar">Somar +1</button>
+    <hr>
+    <input type="text" :value="contador">
+    <input type="text" :value="contador2">
+  </div>
+<script>
+      var app = new Vue({
+    el: '#app',
+    data: {
+      contador:0,
+      contador2:0
+    },
+    methods:{
+      somar(){
+        this.contador++
+        this.contador2 += this.contador
+      }
+    }
+  })
+</script>

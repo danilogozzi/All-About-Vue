@@ -1,0 +1,56 @@
+<script src="https://unpkg.com/vue"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+<div id="desafio">
+    <!-- 1) Preencha a tag <p> abaixo com o seu Nome e Idade - usando Interpolação -->
+    <p>{{name}} e {{age}} - {{description}}</p>
+
+    <!-- 2) Exiba sua idade multiplicada por 3 -->
+    <p>{{age * 3}}</p>
+    <p>{{description}}Futuro Fullstack</p>
+
+    <!-- 3) Chame uma função para exibir um número randomico
+        entre 0 and 1 (Math.random()) -->
+    <p>{{sorteio()}}</p>
+
+    <!-- 4) Procure uma imagem no google e exiba na tag img 
+        fazendo o binding no atributo "src" -->
+    <div>
+        <img v-bind:src="link" height="720" width="1280">
+    </div>
+    <br>
+    <!-- 5) Inicialize o input com o seu nome (use o atributo "value") -->
+    <div>
+        <input v-bind:value="name" type="text">
+    </div>
+    <br>
+    <div class="card" style="width:500px;">
+        <div class="card-image">
+            <figure class="image is-4by3">
+                <img v-bind:src="link" alt="Placeholder image">
+            </figure>
+        </div>
+        <div class="card-content">
+            <div class="media">
+                <div class="media-left">
+                    <figure class="image is-48x48">
+                        <img v-bind:src="link" alt="Placeholder image">
+                    </figure>
+                </div>
+                <div class="media-content">
+                    <p class="title is-4">Dano:{{zed[0]}},Ultimate:{{zed[1]}}</p>
+                    <p class="subtitle is-6">@johnsmith</p>
+                </div>
+            </div>
+
+            <div class="content">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Phasellus nec iaculis mauris. <a>@bulmaio</a>.
+                <a href="#">#css</a> <a href="#">#responsive</a>
+                <br>
+                <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="app.js"></script>
