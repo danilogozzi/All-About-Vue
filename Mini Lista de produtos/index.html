@@ -1,0 +1,139 @@
+<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+<script src="http://localhost:8080"></script>
+
+<div id="app">
+  <form-control>
+    <label>
+      Nome:
+      <input v-model="prodName" type="text">
+    </label>
+    <label>
+      Descrição:
+      <input v-model="prodDesc" type="text">
+    </label>
+    <label>
+      Preço:
+      <input v-model="prodValue" type="number">
+    </label>
+    <button @click="addProd">Registrar Produto</button>
+  </form-control>
+  <hr>
+  <ul class="item-prod">
+    <li class="prod" v-for="produto in produtos" :key="produto">
+      <img class="prod-img" :src="produto.prodImg">
+      <br>
+      <span>{{produto.name}}</span>
+      <p>{{produto.description}}</p>
+      <span>R$ {{produto.value}}</span>
+    </li>
+  </ul>
+  <hr>
+  <input type="text" v-model="name">{{name}}
+  <hr>
+  <input type="text" v-model="newCat">
+  <button @click="addCat">ADD CAT</button>
+</div>
+<script>
+  var app = new Vue({
+    el: '#app',
+    data: {
+      searchproduct:"",
+      name: "",
+      cats: [],
+      newCat: null,
+      prodName: "",
+      prodDesc: "",
+      prodValue: "",
+      produtos: [
+        { name: "Cadeira", value: 50, description: "Ferro Inox", stock: true, prodImg: "https://cdn.lojasempreinox.com.br/media/catalog/product/cache/1/image/1000x1231/17f82f742ffe127f42dca9de82fb58b1/c/a/cadeiras_cozinha_inox.jpg" },
+        { name: "Mesa", value: 100, description: "Mesa Vidro Temperado", stock: true, prodImg: "https://a-static.mlcdn.com.br/618x463/tampo-de-vidro-temperado-incolor-para-mesa-120x120cm-8mm-tempermax/woodglass/1887p/b88ea5bf5cfe14ca9da03102f8553f46.jpg" },
+        { name: "Armário de cozinha", value: 750, description: "Madeira Cedro", stock: true, prodImg: "https://cdn.leroymerlin.com.br/products/armario_de_cozinha_compacta_barbara_6_portas_1_gaveta_poquema_1566970454_15d4_600x600.jpg" }
+      ],
+      newProdutos: ""
+    },
+    methods: {
+      addProd: function () {
+        this.produtos.push({
+          name: this.prodName,
+          description: this.prodDesc,
+          value: this.prodValue
+        })
+        console.log(this.produtos)
+        console.log(
+          `${this.prodName} -> R$${this.prodValue} (${this.prodDesc})`
+        )
+        this.saveProducts();
+        this.prodName = ""
+        this.prodDesc = ""
+        this.prodValue = ""
+      },
+      saveCats() {
+        const parsed = JSON.stringify(this.cats);
+        localStorage.setItem('cats', parsed);
+      },
+      saveProducts() {
+        const parsed = JSON.stringify(this.produtos);
+        localStorage.setItem('produtos', parsed);
+      },
+      addCat() {
+        this.cats.push(this.newCat)
+        this.newCat = ""
+        console.log(this.cats)
+        this.saveCats();
+      }
+    },
+    mounted() {
+      //if (localStorage.name) this.name = localStorage.name;
+      if (localStorage.getItem('cats')) {
+        try {
+          this.cats = JSON.parse(localStorage.getItem('cats'));
+        } catch (error) {
+          localStorage.removeItem('cats');
+        }
+      }
+      //-------------------------------------------------------
+      //if (localStorage.name) this.name = localStorage.name;
+      if (localStorage.getItem('produtos')) {
+        try {
+          this.produtos = JSON.parse(localStorage.getItem('produtos'));
+        } catch (error) {
+          localStorage.removeItem('produtos');
+        }
+      }
+    },
+    watch: {
+      name(newName) {
+        localStorage.name = newName;
+      }
+    }
+  })
+</script>
+<style>
+  .prod-img {
+    width: 15rem;
+  }
+
+  .item-prod {
+    list-style: none;
+    border: 1px solid black;
+    display: flex;
+    padding: 2rem;
+    overflow-x: scroll;
+  }
+
+  .prod {
+    border: 1px solid black;
+    width: 25rem;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    height: 25rem;
+    margin: 1rem;
+  }
+
+  .prod img {
+    width: 20rem;
+    height: 15rem;
+    margin: 2rem;
+  }
+</style>

@@ -1,0 +1,54 @@
+<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+<script src="http://localhost:8080"></script>
+
+<div id="app">
+  <img :src="textos[indice].img" alt="">
+  <br>
+  {{textos[indice].product}}
+  <br>
+  {{textos[indice].desc}}
+  <br>
+  {{textos[indice].value}}
+  <br>
+  <button @click="numero--">Prev</button>
+  <button @click="numero++">Next</button>
+  <br>
+  <hr>
+  <input type="number" v-model="numero">
+  <br>
+  {{textos[indice].desc}}
+</div>
+<script>
+  var app = new Vue({
+    el: '#app',
+    data: {
+      searchProduct:"",
+      numero:0,
+      textos:[
+        {product:"Geladeira",desc:"Inox Preto", value:3000, img:"https://www.casasbahia-imagens.com.br/Control/ArquivoExibir.aspx?IdArquivo=1469316240"},
+        {product:"Armario de cozinha",desc:"Madeira", value:1000, img:"https://d1likr6vgtxkkw.cloudfront.net/Custom/Content/Products/03/12/0312_armario-kits-cozinha-titanium-05-portas-vidro-cinza-k5pv4g-c-colormaq_l2_637371692658682903.jpg"},
+        {product:"Mesa", desc:"Vidro", value:"700", img:"https://a-static.mlcdn.com.br/618x463/tampo-de-vidro-temperado-incolor-para-mesa-120x120cm-8mm-tempermax/woodglass/1887p/b88ea5bf5cfe14ca9da03102f8553f46.jpg"}
+      ]
+    },
+    methods: {
+    },
+    mounted() {
+
+    },
+    computed:{
+      indice(){
+        return Math.abs(this.numero % 3)
+      }
+    }
+    
+  })
+</script>
+<style>
+#app{
+  text-align: center;
+}
+#app img{
+  width: 10rem;
+  height: 10rem;
+}
+</style>
